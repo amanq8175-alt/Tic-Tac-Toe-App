@@ -1,0 +1,123 @@
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(220, 20%, 97%);
+    color: hsl(220, 25%, 10%);
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 420px;
+  }
+  h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
+  .scoreboard { display: flex; gap: 0.75rem; width: 100%; }
+  .score-card {
+    flex: 1;
+    text-align: center;
+    background: #fff;
+    border: 2px solid hsl(220, 15%, 88%);
+    border-radius: 12px;
+    padding: 0.75rem 0.5rem;
+  }
+  .score-card.x { border-color: hsl(220, 70%, 75%); }
+  .score-card.o { border-color: hsl(350, 65%, 75%); }
+  .score-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .score-card.x .score-label { color: hsl(220, 70%, 55%); }
+  .score-card.o .score-label { color: hsl(350, 65%, 55%); }
+  .score-card.draw .score-label { color: hsl(220, 10%, 45%); }
+  .score-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.25rem; }
+  .status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-height: 1.8rem;
+    transition: color 0.2s;
+  }
+  .status.x-wins { color: hsl(220, 70%, 55%); }
+  .status.o-wins { color: hsl(350, 65%, 55%); }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 1;
+  }
+  .cell {
+    background: #fff;
+    border: 2px solid hsl(220, 15%, 88%);
+    border-radius: 12px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cell:hover:not(.taken):not(.game-over) {
+    border-color: hsl(220, 70%, 55%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px hsla(220, 70%, 55%, 0.15);
+  }
+  .cell:active:not(.taken):not(.game-over) { transform: scale(0.95); }
+  .cell.taken, .cell.game-over { cursor: default; }
+  .cell.game-over:not(.taken) { background: hsl(220, 15%, 95%); opacity: 0.6; }
+  .cell.x { color: hsl(220, 70%, 55%); border-color: hsl(220, 70%, 80%); background: hsl(220, 70%, 97%); }
+  .cell.o { color: hsl(350, 65%, 55%); border-color: hsl(350, 65%, 80%); background: hsl(350, 65%, 97%); }
+  .cell.win-x {
+    background: hsl(220, 70%, 92%);
+    border-color: hsl(220, 70%, 55%);
+    box-shadow: 0 0 16px hsla(220, 70%, 55%, 0.3);
+    animation: pulse 1s ease-in-out infinite;
+  }
+  .cell.win-o {
+    background: hsl(350, 65%, 92%);
+    border-color: hsl(350, 65%, 55%);
+    box-shadow: 0 0 16px hsla(350, 65%, 55%, 0.3);
+    animation: pulse 1s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  @keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .cell span { animation: pop 0.2s ease-out; display: inline-block; }
+  .controls { display: flex; gap: 0.75rem; }
+  button.btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid hsl(220, 15%, 88%);
+    background: #fff;
+    color: hsl(220, 25%, 10%);
+    transition: all 0.15s;
+  }
+  button.btn:hover { border-color: hsl(220, 70%, 55%); background: hsl(220, 70%, 97%); }
+  button.btn:active { transform: scale(0.96); }
+  @media (min-width: 480px) {
+    h1 { font-size: 2.5rem; }
+    .cell { font-size: 3.5rem; border-radius: 16px; }
+    .board { gap: 0.75rem; }
+    .score-value { font-size: 2rem; }
+    .status { font-size: 1.4rem; }
+    .container { gap: 2rem; }
+  }
